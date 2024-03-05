@@ -16,7 +16,7 @@ jobs:
           GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP_SA_KEY }}
           
       - name: Authenticate with Google Cloud
-        run: gcloud auth activate-service-account --key-file=gcp-demo-project-415805-8e27a3cd1078.json
+        run: gcloud auth activate-service-account --key-file=server/gcp-demo-project-415805-8e27a3cd1078.json
       - name: Create App Engine on GCP
         run: gcloud app create --region=us-central
 
