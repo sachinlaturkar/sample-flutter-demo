@@ -12,8 +12,10 @@ on:
         run: gcloud config set project ${{ secrets.GCP_PROJECT_ID }}
         env:
           GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP_SA_KEY }}
+---
+    steps:
      - name: Create App Engine on GCP
-        run: gcloud app create --region=us-central
+        run: gcloud app create --region=us-east4
       - name: Clone GitHub Repo
         uses: actions/checkout@v2
       - name: Deploy App Engine to GCP
