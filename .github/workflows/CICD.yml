@@ -16,7 +16,7 @@ jobs:
           GOOGLE_APPLICATION_CREDENTIALS: /home/runner/work/Sample_Flutter_Project/gcp-demo-project-415805-41c60bd7a0c7.json
 
       - name: Authenticate with Google Cloud
-        run: gcloud auth activate-service-account --key-file=${{ secrets.GCP_SA_KEY }}
+        run: gcloud auth activate-service-account --key-file=/home/runner/work/Sample_Flutter_Project/gcp-demo-project-415805-41c60bd7a0c7.json
 
       - name: Create App Engine on GCP
         run: gcloud app create --region=us-east4
