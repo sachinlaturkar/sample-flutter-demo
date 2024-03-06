@@ -49,7 +49,7 @@ jobs:
       - name: Set up Kubernetes
         run: |
           echo "Setting up Kubernetes"
-          gcloud container clusters get-credentials your-cluster-name --region=${{ env.LOCATION }}
+          gcloud container clusters get-credentials autopilot-cluster-1 --region=${{ env.LOCATION }}
 
       - name: Configure Docker for GCR
         run: gcloud auth configure-docker -q
