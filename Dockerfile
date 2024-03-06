@@ -16,4 +16,4 @@ RUN flutter pub cache repair
 RUN flutter build web
 # Document the exposed port and start serser
 EXPOSE 8080
-ENTRYPOINT [ "server/server.sh" ]
+ENTRYPOINT [ "/usr/local/bin/ server/server.sh" ]
