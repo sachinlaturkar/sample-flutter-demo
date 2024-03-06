@@ -14,6 +14,12 @@ WORKDIR /usr/local/bin/app
 # RUN flutter pub get
 RUN flutter pub cache repair
 RUN flutter build web
-# Document the exposed port and start serser
-EXPOSE 8080
-ENTRYPOINT [ "/usr/local/bin/ server/server.sh" ]
+# use nginx to deploy
+FROM nginx:1.25.2-alpine
+
+# copy the info of the builded web app to nginx
+COPY --from=build-env /app/build/web /usr/share/nginx/html
+
+# Expose and run nginx
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
