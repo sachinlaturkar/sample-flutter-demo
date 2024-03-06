@@ -17,16 +17,4 @@ spec:
         image: gcr.io/gcp-demo-project-415805/sampleapp:latest # Replace with your GCR image details
         ports:
         - containerPort: 80 # Adjust the port as needed
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: K8S-LB
-spec:
-  selector:
-    app: sampleapp
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 80 # Match the container port
-  type: LoadBalancer # Use 'LoadBalancer' if you want an external IP
+
