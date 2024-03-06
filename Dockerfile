@@ -11,8 +11,9 @@ RUN flutter doctor -v
 # Copy files to container and get dependencies
 COPY . /usr/local/bin/app
 WORKDIR /usr/local/bin/app
-RUN flutter pub get
+# RUN flutter pub get
+RUN flutter pub cache repair
 RUN flutter build web
 # Document the exposed port and start serser
 EXPOSE 8080
-ENTRYPOINT [ "/usr/local/bin/app/server/server.sh" ]
+ENTRYPOINT [ "server/server.sh" ]
