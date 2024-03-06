@@ -38,7 +38,7 @@ jobs:
         run: gcloud config set project ${{ secrets.GCP_PROJECT_ID }}
 
       - name: Build Docker image
-        run: docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/sampleapp:${{ github.sha }} .
+        run: docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/sampleapp .
 
       - name: Install Kubernetes tools
         run: |
@@ -60,7 +60,7 @@ jobs:
         run: gcloud auth configure-docker -q
 
       - name: Push Docker image to GCR
-        run: docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/sampleapp:${{ github.sha }}
+        run: docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/sampleapp
 
       - name: Deploy to Kubernetes
         run: |
