@@ -2,8 +2,10 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: sampleapp-deployment
+  labels:
+    app: sampleapp
 spec:
-  replicas: 3 # Adjust the number of replicas as needed
+  replicas: 3
   selector:
     matchLabels:
       app: sampleapp
@@ -13,8 +15,7 @@ spec:
         app: sampleapp
     spec:
       containers:
-      - name: sampleapp-container
-        image: gcr.io/gcp-demo-project-415805/sampleapp:latest # Replace with your GCR image details
-        ports:
-        - containerPort: 80 # Adjust the port as needed
-
+        - name: sampleapp-container
+          image: gcr.io/gcp-demo-project-415805/sampleapp:latest
+          ports:
+            - containerPort: 80
