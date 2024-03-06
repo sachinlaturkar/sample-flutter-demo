@@ -46,6 +46,11 @@ jobs:
           sudo apt-get update -q
           sudo apt-get install -q -y kubectl
 
+      - name: Install Kubernetes Plugins
+        run: |
+          echo "Installing Plugins"
+            gcloud components install gke-gcloud-auth-plugin
+
       - name: Set up Kubernetes
         run: |
           echo "Setting up Kubernetes"
