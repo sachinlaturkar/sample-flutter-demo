@@ -15,7 +15,7 @@ spec:
       spec:
          containers:
             - name: bb-site
-              image: gcr.io/gcp-demo-project-415805/sampleapp:latest
+              image: gcr.io/${{ secrets.GCP_PROJECT_ID }}/sampleapp:${{ github.sha }}
               
 ---
 apiVersion: v1
