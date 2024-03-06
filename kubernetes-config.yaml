@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: sampleapp-container
-          image: gcr.io/gcp-demo-project-415805/sampleapp:latest
+          image: gcr.io/${{ secrets.GCP_PROJECT_ID }}/sampleapp:latest
           ports:
             - containerPort: 80
