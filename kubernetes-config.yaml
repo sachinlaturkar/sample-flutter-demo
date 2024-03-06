@@ -2,8 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: sampleapp-deployment
-  labels:
-    app: sampleapp
 spec:
   replicas: 3
   selector:
@@ -19,3 +17,16 @@ spec:
           image: gcr.io/${{ secrets.GCP_PROJECT_ID }}/sampleapp:latest
           ports:
             - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: K8S-LB
+spec:
+  selector:
+    app: sampleapp
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80 # Match the container port
+  type: LoadBalancer # Use 'LoadBalancer' if you want an external IP
