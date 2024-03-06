@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sampleapp-deployment
+  name: gcp-deployment
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: sampleapp
+      app: flutterapp
   template:
     metadata:
       labels:
-        app: sampleapp
+        app: flutterapp
     spec:
       containers:
-        - name: sampleapp-container
+        - name: flutterapp-container
           image: gcr.io/${{ secrets.GCP_PROJECT_ID }}/sampleapp:latest
           ports:
             - containerPort: 80
@@ -21,10 +21,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: sampleapp-service
+  name: gcp-service
 spec:
   selector:
-    app: sampleapp
+    app: flutterapp
   ports:
     - protocol: TCP
       port: 80
