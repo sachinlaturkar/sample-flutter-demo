@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: flutter
+  name: sampleapp-deployment
 spec:
   replicas: 3
   selector:
@@ -21,7 +21,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: flutter-LB
+  name: sampleapp-service
 spec:
   selector:
     app: sampleapp
