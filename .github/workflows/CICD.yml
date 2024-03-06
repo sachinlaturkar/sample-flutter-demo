@@ -1,5 +1,11 @@
 name: GCP App Engine Deployment
 
+env:
+  
+  LOCATION: us-east4
+  CI_SERVICE_NAME: github-actions
+  SA_CI_CD_EMAIL: 'kubernetes-sp@gcp-demo-project-415805.iam.gserviceaccount.com'
+
 on:
   push:
     branches:
@@ -12,7 +18,11 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-
+      - name: 'Google auth'
+        id: 'auth'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          service_account: '${{ env.SA_CI_CD_EMAIL }}'
       - name: Set up Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v0.2.0
         with:
