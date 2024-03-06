@@ -1,7 +1,6 @@
-name: GCP App Engine Deployment
+name: GCP Kubernetes Deployment
 
 env:
-  
   LOCATION: us-east4
   CI_SERVICE_NAME: github-actions
   SA_CI_CD_EMAIL: 'kubernetes-sp@gcp-demo-project-415805.iam.gserviceaccount.com'
@@ -21,12 +20,14 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+
       - name: 'Google auth'
         id: 'auth'
         uses: 'google-github-actions/auth@v1'
         with:
           service_account: '${{ env.SA_CI_CD_EMAIL }}'
           credentials_json: ${{ secrets.GCP_SA_KEY }}
+
       - name: Set up Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v0.2.0
         with:
@@ -38,12 +39,25 @@ jobs:
 
       - name: Build Docker image
         run: docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/sampleapp:${{ github.sha }} .
-        
+
+      - name: Install Kubernetes tools
+        run: |
+          echo "Installing kubectl"
+          sudo apt-get update -q
+          sudo apt-get install -q -y kubectl
+
+      - name: Set up Kubernetes
+        run: |
+          echo "Setting up Kubernetes"
+          gcloud container clusters get-credentials your-cluster-name --region=${{ env.LOCATION }}
+
       - name: Configure Docker for GCR
         run: gcloud auth configure-docker -q
-        
+
       - name: Push Docker image to GCR
         run: docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/sampleapp:${{ github.sha }}
 
-      - name: Deploy App Engine to GCP
-        run: gcloud app deploy app.yaml --image-url=gcr.io/${{ secrets.GCP_PROJECT_ID }}/sampleapp:${{ github.sha }} --quiet
+      - name: Deploy to Kubernetes
+        run: |
+          echo "Deploying to Kubernetes"
+          kubectl apply -f kubernetes-config.yaml
