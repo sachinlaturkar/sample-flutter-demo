@@ -15,7 +15,8 @@ spec:
       spec:
          containers:
             - name: bb-site
-              image: gcr.io/gcp-demo-project-415805/sampleapp:${{ github.sha }} .
+              image: gcr.io/gcp-demo-project-415805/sampleapp:${{ github.sha }} 
+              imagePullPolicy: Always
               
 ---
 apiVersion: v1
@@ -24,10 +25,10 @@ metadata:
    name: bb-entrypoint
    namespace: default
 spec:
-   type: NodePort
+   type: LoadBalancer
    selector:
       bb: web
-   ports:
-      - port: 3000
-        targetPort: 3000
-        nodePort: 30001
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 80 # Match the container port
