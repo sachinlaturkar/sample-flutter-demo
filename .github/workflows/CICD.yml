@@ -1,5 +1,4 @@
 name: GCP Kubernetes Deployment
-
 env:
   LOCATION: us-east4
   CI_SERVICE_NAME: github-actions
