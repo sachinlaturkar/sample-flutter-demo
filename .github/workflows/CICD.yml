@@ -40,7 +40,7 @@ jobs:
       - name: Build Docker image
         run: |
           echo "Building Docker image"
-          docker build -t docker.io/${{ secrets.DOCKER_USERNAME }}/samplespringboot:${{ github.sha }} .
+          docker build --no-cache -t docker.io/${{ secrets.DOCKER_USERNAME }}/samplespringboot:${{ github.sha }} .
       
       - name: Push Docker image
         run: |
