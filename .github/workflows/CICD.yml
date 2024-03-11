@@ -62,7 +62,7 @@ jobs:
       - name: Set up Kubernetes
         run: |
           echo "Setting up Kubernetes"
-          gcloud container clusters get-credentials autopilot-cluster-1 --region=${{ env.LOCATION }}
+          gcloud container clusters get-credentials zb-gke --region=${{ env.LOCATION }}
 
       - name: Deploy to Kubernetes
         run: |
