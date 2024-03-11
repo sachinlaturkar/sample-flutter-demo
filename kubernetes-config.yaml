@@ -30,4 +30,4 @@ spec:
       bb: springboot
    ports:
       - port: 80
-        targetPort: 8080
+        targetPort: 8082
