@@ -15,7 +15,7 @@ spec:
       spec:
          containers:
             - name: springboot-site
-              image: slaturka/samplespringboot:latest
+              image: slaturka/samplespringboot
               imagePullPolicy: Always
               
 ---
