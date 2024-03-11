@@ -15,7 +15,7 @@ spec:
       spec:
          containers:
             - name: springboot-site
-              image: docker.io/slaturka/samplespringboot:${{ github.sha }}
+              image: slaturka/samplespringboot:latest
               imagePullPolicy: Always
               
 ---
