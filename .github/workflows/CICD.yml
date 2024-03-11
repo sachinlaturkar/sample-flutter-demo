@@ -40,13 +40,13 @@ jobs:
       - name: Build Docker image
         run: |
           echo "Building Docker image"
-          docker build -t docker.io/your-docker-username/samplespringboot:${{ github.sha }} .
+          docker build -t docker.io/${{ secrets.DOCKER_USERNAME }}/samplespringboot:${{ github.sha }} .
       
       - name: Push Docker image
         run: |
           echo "Pushing Docker image"
           docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin <<< ${{ secrets.DOCKER_PAT }}
-          docker push docker.io/your-docker-username/samplespringboot:${{ github.sha }}
+          docker push docker.io/${{ secrets.DOCKER_USERNAME }}/samplespringboot:${{ github.sha }}
 
       - name: Install Kubernetes tools
         run: |
